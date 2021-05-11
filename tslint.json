@@ -1,9 +1,11 @@
 {
   "extends": "tslint:recommended",
+
   "rulesDirectory": [
     "codelyzer"
   ],
   "rules": {
+    "no-trailing-whitespace": false,
     "align": {
       "options": [
         "parameters",

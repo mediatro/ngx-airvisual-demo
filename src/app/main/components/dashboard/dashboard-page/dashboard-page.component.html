@@ -1,0 +1,45 @@
+<div fxLayout="column" fxLayoutGap="8px">
+  <mat-card>
+    <mat-card-actions>
+      <button mat-button (click)="logout()">Logout</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card>
+    <form fxLayout="column">
+      <app-dashboard-form-field-autocomplete label="Country"
+                                             [control]="form.get('country')"
+                                             [options$]="countries$"
+      ></app-dashboard-form-field-autocomplete>
+
+      <app-dashboard-form-field-autocomplete label="State"
+                                             [control]="form.get('state')"
+                                             [options$]="states$"
+      ></app-dashboard-form-field-autocomplete>
+
+      <app-dashboard-form-field-autocomplete label="City"
+                                             [control]="form.get('city')"
+                                             [options$]="cities$"
+      ></app-dashboard-form-field-autocomplete>
+    </form>
+
+    <mat-card-actions>
+      <button mat-button (click)="saveFormState()" [disabled]="!canSave()">Save</button>
+      <button mat-button (click)="loadFormState()" [disabled]="!hasSavedFormState()">Load</button>
+      <button mat-button (click)="clearFormState()" [disabled]="!hasSavedFormState()">Clear</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div *ngIf="!cityData">Select city to view results</div>
+
+  <ng-container *ngIf="cityData">
+    <app-dashboard-result-card title="Weather"
+                               [data]="cityData.current.weather"
+    ></app-dashboard-result-card>
+
+    <app-dashboard-result-card title="Pollution"
+                               [data]="cityData.current.pollution"
+    ></app-dashboard-result-card>
+  </ng-container>
+
+</div>
